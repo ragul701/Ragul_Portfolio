@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { FaGithub, FaLinkedinIn, FaInstagram, FaWhatsapp, FaEnvelope, FaReact, FaJs, FaNodeJs, FaCss3Alt, FaGitAlt, FaHouse, FaUser, FaCode, FaBriefcase, FaFolderOpen } from 'react-icons/fa6'
 import './App.css'
+import './extra.css'
 
-const roles = ['Frontend Developer', 'React Developer', 'UI Engineer']
+const roles = ['Fullstack Developer', 'React Developer', ]
 const links = ['home', 'about', 'skills', 'experience', 'projects', 'contact']
 const skills = [
   { n: 'React', v: 85 }, { n: 'JavaScript', v: 88 }, { n: 'HTML & CSS', v: 92 },
@@ -15,7 +16,10 @@ const projects = [
   { t: 'Project Four', d: 'One line about what this project does and why it matters.', tag: 'UI', stack: ['React', 'CSS'] },
 ]
 const stats = [[10, '+', 'Projects built'], [1, '+', 'Years learning'], [15, '+', 'Technologies']]
-const tech = ['React', 'JavaScript', 'Node.js', 'MongoDB', 'Git', 'Vite', 'CSS', 'Figma', 'REST APIs', 'GitHub']
+const tech = [
+  ['React', '#61dafb'], ['JavaScript', '#f7df1e'], ['Node.js', '#7ac74f'], ['MongoDB', '#00ed64'], ['Git', '#f05032'],
+  ['Vite', '#a855f7'], ['CSS', '#38bdf8'], ['Figma', '#f24e9a'], ['REST APIs', '#22c55e'], ['GitHub', '#a78bfa'],
+]
 const timeline = [
   { y: '2026', t: 'Freelance and portfolio projects', d: 'Building real apps with React and Node.' },
   { y: '2025', t: 'Your degree or course name', d: 'College or institute name and key subjects.' },
@@ -24,10 +28,10 @@ const timeline = [
 
 // TODO: unga real links inga podunga
 const socials = [
-  { n: 'GitHub', i: FaGithub, c: '#24292f', href: 'https://github.com/YOUR_USERNAME' },
+  { n: 'GitHub', i: FaGithub, c: '#24292f', href: 'https://github.com/ragul701' },
   { n: 'LinkedIn', i: FaLinkedinIn, c: '#0a66c2', href: 'https://linkedin.com/in/YOUR_USERNAME' },
   { n: 'Instagram', i: FaInstagram, c: '#e1306c', href: 'https://instagram.com/YOUR_USERNAME' },
-  { n: 'WhatsApp', i: FaWhatsapp, c: '#25d366', href: 'https://wa.me/91XXXXXXXXXX' },
+  { n: 'WhatsApp', i: FaWhatsapp, c: '#25d366', href: 'https://wa.me/918807239224' },
   { n: 'Email', i: FaEnvelope, c: '#06b6d4', href: 'mailto:yourname@gmail.com' },
 ]
 
@@ -212,7 +216,7 @@ export default function App() {
   const [scrolled, setScrolled] = useState(false)
   const [hide, setHide] = useState(false)
   const navRef = useRef(null)
-  const [photo, setPhoto] = useState('/profile.png')
+  const [photo, setPhoto] = useState(() => { try { return localStorage.getItem('photo') || '' } catch { return '' } })
   const fileRef = useRef(null)
   useEffect(() => {
     document.documentElement.style.overflow = open ? 'hidden' : ''
@@ -220,7 +224,16 @@ export default function App() {
     window.addEventListener('keydown', esc)
     return () => window.removeEventListener('keydown', esc)
   }, [open])
-  const pick = (e) => { const f = e.target.files?.[0]; if (f) setPhoto(URL.createObjectURL(f)) }
+  const pick = (e) => {
+    const f = e.target.files?.[0]
+    if (!f) return
+    const r = new FileReader()
+    r.onload = () => {
+      setPhoto(r.result)
+      try { localStorage.setItem('photo', r.result) } catch {}
+    }
+    r.readAsDataURL(f)
+  }
   const aim = (e) => {
     const r = e.currentTarget.getBoundingClientRect()
     e.currentTarget.style.setProperty('--tx', ((e.clientX - r.left) / r.width - 0.5).toFixed(3))
@@ -327,12 +340,12 @@ export default function App() {
 
         <nav ref={navRef} className={open ? 'open' : ''}>
           <div className="mprofile">
-            <img src={photo} alt="" />
+            {photo ? <img src={photo} alt="" /> : <span className="mavatar">R</span>}
             <div><b>Ragul G</b><small>Frontend Developer</small></div>
           </div>
           {menu.map(({ id, i: I, c }, k) => (
             <a key={id} href={`#${id}`} style={{ '--k': k, '--c': c }} className={`mlink ${active === id ? 'on' : ''}`} onClick={() => setOpen(false)}>
-              <span className="mi"><I /></span><span className="ml">{id}</span><em>0{k + 1}</em>
+              <span className="mi"><I /></span><span className="ml">{id}</span>
             </a>
           ))}
           <div className="mfoot">
@@ -373,7 +386,9 @@ export default function App() {
                 ))}
               </div>
               <div className="avatar">
-                <img src={photo} alt="Ragul G" />
+                {photo
+                  ? <img src={photo} alt="Ragul G" />
+                  : <button type="button" className="empty" onClick={() => fileRef.current?.click()}><FaUser /><span>Add your photo</span></button>}
                 <button type="button" className="plus" aria-label="Change photo" onClick={() => fileRef.current?.click()}><span /></button>
                 <input ref={fileRef} type="file" accept="image/*" hidden onChange={pick} />
               </div>
@@ -390,7 +405,7 @@ export default function App() {
         </section>
 
         <div className="marquee" aria-hidden="true">
-          <div>{[...tech, ...tech].map((t, k) => <span key={k}>{t}</span>)}</div>
+          <div>{[...tech, ...tech].map(([n, c], k) => <span key={k} style={{ '--c': c }}><i />{n}</span>)}</div>
         </div>
 
         <section id="about" className="section">
