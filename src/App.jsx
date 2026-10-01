@@ -1,14 +1,48 @@
 import { useEffect, useRef, useState } from 'react'
-import { FaGithub, FaLinkedinIn, FaInstagram, FaWhatsapp, FaEnvelope, FaReact, FaJs, FaNodeJs, FaCss3Alt, FaGitAlt, FaHouse, FaUser, FaCode, FaBriefcase, FaFolderOpen } from 'react-icons/fa6'
+import { FaGithub, FaLinkedinIn, FaInstagram, FaWhatsapp, FaEnvelope, FaReact, FaJs, FaNodeJs, FaCss3Alt, FaGitAlt, FaHouse, FaUser, FaCode, FaFolderOpen, FaHtml5, FaArrowPointer } from 'react-icons/fa6'
+import { SiVite, SiExpress, SiMongodb, SiPostman } from 'react-icons/si'
 import './App.css'
 import './extra.css'
 
 const roles = ['Fullstack Developer', 'React Developer', ]
-const links = ['home', 'about', 'skills', 'experience', 'projects', 'contact']
-const skills = [
-  { n: 'React', v: 85 }, { n: 'JavaScript', v: 88 }, { n: 'HTML & CSS', v: 92 },
-  { n: 'Node.js', v: 65 }, { n: 'Git & GitHub', v: 78 }, { n: 'MongoDB', v: 60 },
+const links = ['home', 'about', 'skills', 'projects', 'contact']
+
+const skillGroups = [
+  { g: 'Frontend', items: [
+    { n: 'React', i: FaReact, c: '#61dafb' },
+    { n: 'JavaScript', i: FaJs, c: '#f7df1e' },
+    { n: 'HTML & CSS', i: FaHtml5, c: '#e34f26' },
+    { n: 'Vite', i: SiVite, c: '#a855f7' },
+  ] },
+  { g: 'Backend', items: [
+    { n: 'Node.js', i: FaNodeJs, c: '#7ac74f' },
+    { n: 'Express', i: SiExpress, c: '#9ca3af' },
+    { n: 'MongoDB', i: SiMongodb, c: '#00ed64' },
+    { n: 'REST APIs', i: FaCode, c: '#22c55e' },
+  ] },
+  { g: 'Tools', items: [
+    { n: 'Git & GitHub', i: FaGitAlt, c: '#f05032' },
+    { n: 'VS Code', i: FaCode, c: '#3b9cff' },
+    { n: 'Postman', i: SiPostman, c: '#ff6c37' },
+    { n: 'cursor', i: FaArrowPointer, c: '#f472b6' },
+  ] },
 ]
+
+const about = {
+  intro:
+    "Hi, I'm Ragul, a fullstack developer who turns ideas into fast, clean web apps with React and Node.",
+  sub:
+    "I sweat the small details: spacing, motion, loading states, the things people feel but rarely notice. Right now I'm levelling up in JavaScript and system design, and building projects I can actually ship.",
+  tags: ['Clean UI', 'Fullstack MERN', 'Fast and responsive', 'Always learning'],
+  facts: [
+    { label: 'Studying', value: 'Bsc Information Technology, GTN Arts and Science College' },
+    { label: 'Building', value: 'MERN projects, portfolio sites, small tools' },
+    { label: 'Learning now', value: 'JavaScript, system design, DSA' },
+    { label: 'Looking for', value: 'Internships and Junior Fullstack roles' },
+    { label: 'Based in', value: 'Dindigul,Tamilnadu, India' },
+  ],
+}
+
 const projects = [
   { t: 'Project One', d: 'One line about what this project does and why it matters.', tag: 'Web', stack: ['React', 'Node'] },
   { t: 'Project Two', d: 'One line about what this project does and why it matters.', tag: 'UI', stack: ['CSS', 'Figma'] },
@@ -20,19 +54,13 @@ const tech = [
   ['React', '#61dafb'], ['JavaScript', '#f7df1e'], ['Node.js', '#7ac74f'], ['MongoDB', '#00ed64'], ['Git', '#f05032'],
   ['Vite', '#a855f7'], ['CSS', '#38bdf8'], ['Figma', '#f24e9a'], ['REST APIs', '#22c55e'], ['GitHub', '#a78bfa'],
 ]
-const timeline = [
-  { y: '2026', t: 'Freelance and portfolio projects', d: 'Building real apps with React and Node.' },
-  { y: '2025', t: 'Your degree or course name', d: 'College or institute name and key subjects.' },
-  { y: '2024', t: 'Started web development', d: 'HTML, CSS, JavaScript and my first projects.' },
-]
-
-// TODO: unga real links inga podunga
+// TODO: 
 const socials = [
   { n: 'GitHub', i: FaGithub, c: '#24292f', href: 'https://github.com/ragul701' },
   { n: 'LinkedIn', i: FaLinkedinIn, c: '#0a66c2', href: 'https://linkedin.com/in/YOUR_USERNAME' },
-  { n: 'Instagram', i: FaInstagram, c: '#e1306c', href: 'https://instagram.com/YOUR_USERNAME' },
+  { n: 'Instagram', i: FaInstagram, c: '#e1306c', href: 'https://instagram.com/_but_iam_casual_' },
   { n: 'WhatsApp', i: FaWhatsapp, c: '#25d366', href: 'https://wa.me/918807239224' },
-  { n: 'Email', i: FaEnvelope, c: '#06b6d4', href: 'mailto:yourname@gmail.com' },
+  { n: 'Email', i: FaEnvelope, c: '#06b6d4', href: 'mailto:r96213306@gmail.com' },
 ]
 
 const orbit = [
@@ -69,7 +97,6 @@ const menu = [
   { id: 'home', i: FaHouse, c: '#6366f1' },
   { id: 'about', i: FaUser, c: '#06b6d4' },
   { id: 'skills', i: FaCode, c: '#f59e0b' },
-  { id: 'experience', i: FaBriefcase, c: '#10b981' },
   { id: 'projects', i: FaFolderOpen, c: '#ec4899' },
   { id: 'contact', i: FaEnvelope, c: '#8b5cf6' },
 ]
@@ -181,7 +208,7 @@ function Contact() {
   const [copied, setCopied] = useState(false)
   const submit = (e) => { e.preventDefault(); setSent(true); e.target.reset() }
   const copy = () => {
-    navigator.clipboard?.writeText('yourname@gmail.com')
+    navigator.clipboard?.writeText('r96213306@gmail.com')
     setCopied(true)
     setTimeout(() => setCopied(false), 1800)
   }
@@ -202,7 +229,7 @@ function Contact() {
         <button type="button" className="round" aria-label="Switch form"
           onClick={() => { setSent(false); setHire(!hire) }}>{hire ? '←' : '+'}</button>
       </div>
-      <button type="button" className="copy" onClick={copy}>{copied ? 'Copied to clipboard' : 'yourname@gmail.com'}</button>
+      <button type="button" className="copy" onClick={copy}>{copied ? 'Copied to clipboard' : 'r96213306@gmail.com'}</button>
     </div>
   )
 }
@@ -359,7 +386,7 @@ export default function App() {
       <main>
         <section id="home" className="hero">
           <div className="hero-text">
-            <span className="status"><b />Open to work</span>
+          
             <h1 aria-label="Ragul G">
               {'Ragul G'.split('').map((c, k) => (
                 <span key={k} style={{ '--d': `${k * 60}ms` }}>{c === ' ' ? '\u00A0' : c}</span>
@@ -410,35 +437,38 @@ export default function App() {
 
         <section id="about" className="section">
           <h2 className="reveal">About</h2>
-          <div className="card wide reveal">
-            <p>
-              Write 2 or 3 lines about yourself here: where you study or work,
-              what you like to build, and what you are learning now.
-            </p>
+          <div className="about-card reveal">
+            <div className="about-body">
+              <div className="about-text">
+                <p className="about-intro">{about.intro}</p>
+                <p className="about-sub">{about.sub}</p>
+                <div className="about-tags">
+                  {about.tags.map((t) => <span key={t}>{t}</span>)}
+                </div>
+              </div>
+              <dl className="about-facts">
+                {about.facts.map((f) => (
+                  <div className="about-row" key={f.label}>
+                    <dt>{f.label}</dt>
+                    <dd>{f.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
           </div>
         </section>
 
         <section id="skills" className="section">
           <h2 className="reveal">Skills</h2>
-          <div className="card reveal bars">
-            {skills.map((s) => (
-              <div key={s.n} className="skill">
-                <div className="skill-top"><span>{s.n}</span><span className="muted">{s.v}%</span></div>
-                <div className="bar"><i style={{ '--w': `${s.v}%` }} /></div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section id="experience" className="section">
-          <h2 className="reveal">Experience</h2>
-          <div className="timeline reveal">
-            {timeline.map((x) => (
-              <div className="tl" key={x.y}>
-                <span className="tl-dot" />
-                <small>{x.y}</small>
-                <h3>{x.t}</h3>
-                <p className="muted">{x.d}</p>
+          <div className="skills reveal">
+            {skillGroups.map(({ g, items }) => (
+              <div className="sk-group" key={g}>
+                <h3>{g}</h3>
+                <ul>
+                  {items.map(({ n, i: I, c }) => (
+                    <li key={n} style={{ '--c': c }}><span className="sk-i"><I /></span>{n}</li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
