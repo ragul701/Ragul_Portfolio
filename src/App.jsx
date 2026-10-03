@@ -73,7 +73,7 @@ const tech = [
 // TODO: 
 const socials = [
   { n: 'GitHub', i: FaGithub, c: '#24292f', href: 'https://github.com/ragul701' },
-  { n: 'LinkedIn', i: FaLinkedinIn, c: '#0a66c2', href: 'https://linkedin.com/in/YOUR_USERNAME' },
+  { n: 'LinkedIn', i: FaLinkedinIn, c: '#0a66c2', href: 'https://linkedin.com/in/RAGUL G' },
   { n: 'Instagram', i: FaInstagram, c: '#e1306c', href: 'https://instagram.com/_but_iam_casual_' },
   { n: 'WhatsApp', i: FaWhatsapp, c: '#25d366', href: 'https://wa.me/918807239224' },
   { n: 'Email', i: FaEnvelope, c: '#06b6d4', href: 'https://mail.google.com/mail/?view=cm&fs=1&to=r96213306@gmail.com&su=Hello%20Ragul' },
