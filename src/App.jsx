@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { FaGithub, FaLinkedinIn, FaInstagram, FaWhatsapp, FaEnvelope, FaReact, FaJs, FaNodeJs, FaCss3Alt, FaGitAlt, FaHouse, FaUser, FaCode, FaFolderOpen, FaHtml5, FaArrowPointer } from 'react-icons/fa6'
+import { FaGithub, FaLinkedinIn, FaInstagram, FaWhatsapp, FaEnvelope, FaReact, FaJs, FaNodeJs, FaCss3Alt, FaGitAlt, FaHouse, FaUser, FaCode, FaFolderOpen, FaHtml5 } from 'react-icons/fa6'
 import { SiVite, SiExpress, SiMongodb, SiPostman } from 'react-icons/si'
 import './App.css'
 import './extra.css'
@@ -7,24 +7,40 @@ import './extra.css'
 const roles = ['Fullstack Developer', 'React Developer', ]
 const links = ['home', 'about', 'skills', 'projects', 'contact']
 
+function VSCodeIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+      <path fillRule="evenodd" d="M17.5 2 22 4.2v15.6L17.5 22 8 13.3 3.8 16.5 2 15.6V8.4l1.8-.9L8 10.7zM17.5 6.5v11L11 12z" />
+    </svg>
+  )
+}
+function CursorIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+      <path d="M12 2 21 7v10l-9 5-9-5V7z" />
+      <path d="M12 12 21 7M12 12v10M12 12 3 7" stroke="#151824" strokeWidth="1.3" fill="none" />
+    </svg>
+  )
+}
+
 const skillGroups = [
-  { g: 'Frontend', items: [
+  { g: 'Frontend', s: '#22d3ee', items: [
     { n: 'React', i: FaReact, c: '#61dafb' },
     { n: 'JavaScript', i: FaJs, c: '#f7df1e' },
-    { n: 'HTML & CSS', i: FaHtml5, c: '#e34f26' },
-    { n: 'Vite', i: SiVite, c: '#a855f7' },
+    { n: 'HTML & CSS', i: FaHtml5, c: '#e34f26', i2: FaCss3Alt, c2: '#1572b6' },
+    { n: 'Vite', i: SiVite, c: '#646cff' },
   ] },
-  { g: 'Backend', items: [
-    { n: 'Node.js', i: FaNodeJs, c: '#7ac74f' },
-    { n: 'Express', i: SiExpress, c: '#9ca3af' },
-    { n: 'MongoDB', i: SiMongodb, c: '#00ed64' },
+  { g: 'Backend', s: '#22c55e', items: [
+    { n: 'Node.js', i: FaNodeJs, c: '#5fa04e' },
+    { n: 'Express', i: SiExpress, c: '#e5e7eb' },
+    { n: 'MongoDB', i: SiMongodb, c: '#47a248' },
     { n: 'REST APIs', i: FaCode, c: '#22c55e' },
   ] },
-  { g: 'Tools', items: [
-    { n: 'Git & GitHub', i: FaGitAlt, c: '#f05032' },
-    { n: 'VS Code', i: FaCode, c: '#3b9cff' },
+  { g: 'Tools', s: '#f97316', items: [
+    { n: 'Git & GitHub', i: FaGitAlt, c: '#f05032', i2: FaGithub, c2: '#e6edf3' },
+    { n: 'VS Code', i: VSCodeIcon, c: '#007acc' },
     { n: 'Postman', i: SiPostman, c: '#ff6c37' },
-    { n: 'cursor', i: FaArrowPointer, c: '#f472b6' },
+    { n: 'Cursor', i: CursorIcon, c: '#e6edf3' },
   ] },
 ]
 
@@ -44,10 +60,10 @@ const about = {
 }
 
 const projects = [
-  { t: 'Project One', d: 'One line about what this project does and why it matters.', tag: 'Web', stack: ['React', 'Node'] },
-  { t: 'Project Two', d: 'One line about what this project does and why it matters.', tag: 'UI', stack: ['CSS', 'Figma'] },
-  { t: 'Project Three', d: 'One line about what this project does and why it matters.', tag: 'Web', stack: ['React', 'Mongo'] },
-  { t: 'Project Four', d: 'One line about what this project does and why it matters.', tag: 'UI', stack: ['React', 'CSS'] },
+  { c: '#6366f1', t: 'Project One', d: 'One line about what this project does and why it matters.', tag: 'Web', live: '', code: '', shots: [], status: 'In progress', stack: ['React', 'Node'] },
+  { c: '#ec4899', t: 'Project Two', d: 'One line about what this project does and why it matters.', tag: 'UI', live: '', code: '', shots: [], status: 'In progress', stack: ['CSS', 'Figma'] },
+  { c: '#06b6d4', t: 'Project Three', d: 'One line about what this project does and why it matters.', tag: 'Web', live: '', code: '', shots: [], status: 'In progress', stack: ['React', 'Mongo'] },
+  { c: '#f59e0b', t: 'Project Four', d: 'One line about what this project does and why it matters.', tag: 'UI', live: '', code: '', shots: [], status: 'In progress', stack: ['React', 'CSS'] },
 ]
 const stats = [[10, '+', 'Projects built'], [1, '+', 'Years learning'], [15, '+', 'Technologies']]
 const tech = [
@@ -60,7 +76,7 @@ const socials = [
   { n: 'LinkedIn', i: FaLinkedinIn, c: '#0a66c2', href: 'https://linkedin.com/in/YOUR_USERNAME' },
   { n: 'Instagram', i: FaInstagram, c: '#e1306c', href: 'https://instagram.com/_but_iam_casual_' },
   { n: 'WhatsApp', i: FaWhatsapp, c: '#25d366', href: 'https://wa.me/918807239224' },
-  { n: 'Email', i: FaEnvelope, c: '#06b6d4', href: 'mailto:r96213306@gmail.com' },
+  { n: 'Email', i: FaEnvelope, c: '#06b6d4', href: 'https://mail.google.com/mail/?view=cm&fs=1&to=r96213306@gmail.com&su=Hello%20Ragul' },
 ]
 
 const orbit = [
@@ -175,7 +191,82 @@ function Typer() {
   return <p className="typer">{txt}<b className="caret" /></p>
 }
 
-function Tilt({ children }) {
+const MOCKS = [
+  <div className="mk mk-land">
+    <div className="mk-nav"><b className="logo" /><i /><i /><i /><u /></div>
+    <div className="mk-hero">
+      <div className="mk-copy"><i className="h1" /><i className="h1 s" /><i className="p" /><i className="p s" /><div className="mk-btns"><u className="solid" /><u className="ghost" /></div></div>
+      <div className="mk-art"><span /><span /><span /></div>
+    </div>
+  </div>,
+  <div className="mk mk-dash">
+    <div className="mk-side"><b /><i /><i /><i /><i /></div>
+    <div className="mk-main">
+      <div className="mk-stats">{[0, 1, 2].map((n) => <div key={n}><i className="s" /><b /></div>)}</div>
+      <div className="mk-chart">{[40, 65, 50, 80, 58, 92, 70].map((h, n) => <span key={n} style={{ height: `${h}%` }} />)}</div>
+    </div>
+  </div>,
+  <div className="mk mk-app">
+    <div className="mk-phone">
+      <div className="mk-top"><b /><i /></div>
+      {[0, 1, 2, 3].map((n) => <div className="mk-row" key={n}><span /><div><i /><i className="s" /></div></div>)}
+    </div>
+    <div className="mk-phone alt">
+      <div className="mk-top"><b /><i /></div>
+      <div className="mk-card" /><i /><i className="s" /><div className="mk-cta" />
+    </div>
+  </div>,
+]
+
+function Shots({ shots, status, start = 0 }) {
+  const list = shots && shots.length ? shots : [0, 1, 2]
+  const [i, setI] = useState(start % list.length)
+  const [hold, setHold] = useState(false)
+  const x0 = useRef(null)
+  const go = (d) => setI((v) => (v + d + list.length) % list.length)
+  useEffect(() => {
+    if (hold || matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const t = setInterval(() => setI((v) => (v + 1) % list.length), 3200)
+    return () => clearInterval(t)
+  }, [hold, list.length])
+  return (
+    <div className="shot" onMouseEnter={() => setHold(true)} onMouseLeave={() => setHold(false)}>
+      <div className="shot-bar">
+        <i /><i /><i />
+        <span>localhost:5173</span>
+        <em className="pstat" data-live={status === 'Live'}>{status}</em>
+      </div>
+      <div className="shot-view"
+        onPointerDown={(e) => { x0.current = e.clientX }}
+        onPointerUp={(e) => {
+          if (x0.current === null) return
+          const d = e.clientX - x0.current
+          x0.current = null
+          if (Math.abs(d) > 40) go(d < 0 ? 1 : -1)
+        }}>
+        <button type="button" className="arr l" aria-label="Previous" onClick={() => go(-1)}>‹</button>
+        <button type="button" className="arr r" aria-label="Next" onClick={() => go(1)}>›</button>
+        <span className="cnt">{i + 1}/{list.length}</span>
+        <div className="shot-track" style={{ transform: `translateX(-${i * 100}%)` }}>
+          {list.map((sh, n) => (
+            <div className="shot-slide" key={n}>
+              {shots && shots.length
+                ? <img src={sh} alt="" loading="lazy" draggable="false" />
+                : <div className={`mock m${n % 3}`}>{MOCKS[n % 3]}</div>}
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="shot-dots">
+        {list.map((_, n) => (
+          <button key={n} type="button" aria-label={`Slide ${n + 1}`} className={n === i ? 'on' : ''} onClick={() => setI(n)} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function Tilt({ children, color }) {
   const move = (e) => {
     const r = e.currentTarget.getBoundingClientRect()
     const x = (e.clientX - r.left) / r.width
@@ -190,7 +281,7 @@ function Tilt({ children }) {
     e.currentTarget.style.setProperty('--rx', '0deg')
     e.currentTarget.style.setProperty('--ry', '0deg')
   }
-  return <article className="card tilt" onMouseMove={move} onMouseLeave={leave}>{children}</article>
+  return <article className="card tilt" style={{ '--pc': color }} onMouseMove={move} onMouseLeave={leave}>{children}</article>
 }
 
 function Field({ label, type = 'text', name }) {
@@ -205,8 +296,26 @@ function Field({ label, type = 'text', name }) {
 function Contact() {
   const [hire, setHire] = useState(false)
   const [sent, setSent] = useState(false)
+  const [busy, setBusy] = useState(false)
+  const [err, setErr] = useState(false)
   const [copied, setCopied] = useState(false)
-  const submit = (e) => { e.preventDefault(); setSent(true); e.target.reset() }
+  const submit = async (e) => {
+    e.preventDefault()
+    const form = e.target
+    const key = import.meta.env.VITE_W3F_KEY
+    setSent(false); setErr(false)
+    if (!key) return setErr(true)
+    setBusy(true)
+    const d = new FormData(form)
+    d.append('access_key', key)
+    d.append('subject', hire ? 'New project request from portfolio' : 'New message from portfolio')
+    try {
+      const r = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: d })
+      const j = await r.json()
+      if (j.success) { setSent(true); form.reset() } else setErr(true)
+    } catch { setErr(true) }
+    setBusy(false)
+  }
   const copy = () => {
     navigator.clipboard?.writeText('r96213306@gmail.com')
     setCopied(true)
@@ -220,14 +329,15 @@ function Contact() {
         <p className="muted">{hire ? 'Tell me what you need built' : 'I usually reply within a day'}</p>
         <Field label="Your name" name="name" />
         <Field label="Email address" type="email" name="email" />
-        <Field label={hire ? 'Project budget' : 'Message'} name="extra" />
-        <button className="btn full" type="submit"><span>{hire ? 'Send request' : 'Send message'}</span></button>
+        <Field label={hire ? 'Project budget' : 'Message'} name={hire ? 'budget' : 'message'} />
+        <button className="btn full" type="submit" disabled={busy}><span>{busy ? 'Sending...' : hire ? 'Send request' : 'Send message'}</span></button>
         {sent && <p className="sent">Message sent. I'll reply soon.</p>}
+        {err && <p className="sent" style={{ color: '#ef4444' }}>Couldn't send. Please email me directly.</p>}
       </form>
       <div className="switch-row">
         <span className="muted">{hire ? 'Just want to say hi?' : 'Have a project in mind?'}</span>
         <button type="button" className="round" aria-label="Switch form"
-          onClick={() => { setSent(false); setHire(!hire) }}>{hire ? '←' : '+'}</button>
+          onClick={() => { setSent(false); setErr(false); setHire(!hire) }}>{hire ? '←' : '+'}</button>
       </div>
       <button type="button" className="copy" onClick={copy}>{copied ? 'Copied to clipboard' : 'r96213306@gmail.com'}</button>
     </div>
@@ -461,12 +571,22 @@ export default function App() {
         <section id="skills" className="section">
           <h2 className="reveal">Skills</h2>
           <div className="skills reveal">
-            {skillGroups.map(({ g, items }) => (
-              <div className="sk-group" key={g}>
+            {skillGroups.map(({ g, s, items }) => (
+              <div className="sk-group" key={g} style={{ '--s': s }}>
                 <h3>{g}</h3>
                 <ul>
-                  {items.map(({ n, i: I, c }) => (
-                    <li key={n} style={{ '--c': c }}><span className="sk-i"><I /></span>{n}</li>
+                  {items.map(({ n, i: I, c, i2: I2, c2 }) => (
+                    <li key={n} style={{ '--c': c }}>
+                      {I2 ? (
+                        <span className="sk-i sk-swap">
+                          <span className="sw a" style={{ color: c }}><I /></span>
+                          <span className="sw b" style={{ color: c2 }}><I2 /></span>
+                        </span>
+                      ) : (
+                        <span className="sk-i"><I /></span>
+                      )}
+                      {n}
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -484,12 +604,15 @@ export default function App() {
           <div className="grid" key={tab}>
             {shown.map((p, k) => (
               <div className="pop" style={{ '--i': k }} key={p.t}>
-                <Tilt>
-                  <div className="thumb"><i /><i /><i /></div>
-                  <h3>{p.t}</h3>
+                <Tilt color={p.c}>
+                  <Shots shots={p.shots} status={p.live ? 'Live' : p.status} start={k} />
+                  <div className="phead"><h3>{p.t}</h3><span className="ptag">{p.tag}</span></div>
                   <p className="muted">{p.d}</p>
                   <div className="stack">{p.stack.map((s) => <span key={s}>{s}</span>)}</div>
-                  <div className="links"><a href="#">Live demo</a><a href="#">Source code</a></div>
+                  <div className="links">
+                    {p.live ? <a href={p.live} target="_blank" rel="noreferrer">Live demo</a> : <span className="off" aria-disabled="true" title="Coming soon">Live demo</span>}
+                    {p.code ? <a href={p.code} target="_blank" rel="noreferrer">Source code</a> : <span className="off" aria-disabled="true" title="Coming soon">Source code</span>}
+                  </div>
                 </Tilt>
               </div>
             ))}
