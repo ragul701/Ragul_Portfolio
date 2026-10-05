@@ -51,11 +51,11 @@ const about = {
     "I sweat the small details: spacing, motion, loading states, the things people feel but rarely notice. Right now I'm levelling up in JavaScript and system design, and building projects I can actually ship.",
   tags: ['Clean UI', 'Fullstack MERN', 'Fast and responsive', 'Always learning'],
   facts: [
-    { label: 'Studying', value: 'Bsc Information Technology, GTN Arts and Science College' },
+   { label: 'Studying', value: 'BSc Information Technology, GTN Arts and Science College' },
     { label: 'Building', value: 'MERN projects, portfolio sites, small tools' },
     { label: 'Learning now', value: 'JavaScript, system design, DSA' },
     { label: 'Looking for', value: 'Internships and Junior Fullstack roles' },
-    { label: 'Based in', value: 'Dindigul,Tamilnadu, India' },
+    { label: 'Based in', value: 'Dindigul, Tamil Nadu, India' },
   ],
 }
 
@@ -70,10 +70,10 @@ const tech = [
   ['React', '#61dafb'], ['JavaScript', '#f7df1e'], ['Node.js', '#7ac74f'], ['MongoDB', '#00ed64'], ['Git', '#f05032'],
   ['Vite', '#a855f7'], ['CSS', '#38bdf8'], ['Figma', '#f24e9a'], ['REST APIs', '#22c55e'], ['GitHub', '#a78bfa'],
 ]
-// TODO: 
+// TODO: replace YOUR-LINKEDIN-ID with your real LinkedIn profile id (no spaces)
 const socials = [
   { n: 'GitHub', i: FaGithub, c: '#24292f', href: 'https://github.com/ragul701' },
-  { n: 'LinkedIn', i: FaLinkedinIn, c: '#0a66c2', href: 'https://linkedin.com/in/RAGUL G' },
+  { n: 'LinkedIn', i: FaLinkedinIn, c: '#0a66c2', href: 'https://www.linkedin.com/in/ragul-g-38ab01440/' },
   { n: 'Instagram', i: FaInstagram, c: '#e1306c', href: 'https://instagram.com/_but_iam_casual_' },
   { n: 'WhatsApp', i: FaWhatsapp, c: '#25d366', href: 'https://wa.me/918807239224' },
   { n: 'Email', i: FaEnvelope, c: '#06b6d4', href: 'https://mail.google.com/mail/?view=cm&fs=1&to=r96213306@gmail.com&su=Hello%20Ragul' },
@@ -353,7 +353,8 @@ export default function App() {
   const [scrolled, setScrolled] = useState(false)
   const [hide, setHide] = useState(false)
   const navRef = useRef(null)
-  const [photo, setPhoto] = useState(() => { try { return localStorage.getItem('photo') || '' } catch { return '' } })
+  // Default photo: put your picture at public/photo.jpg. If it's missing, the "Add your photo" button shows instead.
+  const [photo, setPhoto] = useState(() => { try { return localStorage.getItem('photo') || '/photo.jpg' } catch { return '/photo.jpg' } })
   const fileRef = useRef(null)
   useEffect(() => {
     document.documentElement.style.overflow = open ? 'hidden' : ''
@@ -477,8 +478,8 @@ export default function App() {
 
         <nav ref={navRef} className={open ? 'open' : ''}>
           <div className="mprofile">
-            {photo ? <img src={photo} alt="" /> : <span className="mavatar">R</span>}
-            <div><b>Ragul G</b><small>Frontend Developer</small></div>
+            {photo ? <img src={photo} alt="" onError={() => setPhoto('')} /> : <span className="mavatar">R</span>}
+            <div><b>Ragul G</b><small>Fullstack Developer</small></div>
           </div>
           {menu.map(({ id, i: I, c }, k) => (
             <a key={id} href={`#${id}`} style={{ '--k': k, '--c': c }} className={`mlink ${active === id ? 'on' : ''}`} onClick={() => setOpen(false)}>
@@ -524,7 +525,7 @@ export default function App() {
               </div>
               <div className="avatar">
                 {photo
-                  ? <img src={photo} alt="Ragul G" />
+                  ? <img src={photo} alt="Ragul G" onError={() => setPhoto('')} />
                   : <button type="button" className="empty" onClick={() => fileRef.current?.click()}><FaUser /><span>Add your photo</span></button>}
                 <button type="button" className="plus" aria-label="Change photo" onClick={() => fileRef.current?.click()}><span /></button>
                 <input ref={fileRef} type="file" accept="image/*" hidden onChange={pick} />

@@ -553,3 +553,9 @@ main { width: min(92%, 1080px); margin: 0 auto; }
 .mk-row div { flex: 1; display: grid; gap: 4px; }
 .mk-card { height: 56px; border-radius: 10px; background: linear-gradient(135deg, var(--pc), color-mix(in srgb, var(--pc) 35%, #fff)); }
 .mk-cta { height: 14px; border-radius: 999px; background: var(--pc); }
+/* ===== Fix: project links cut aagurathu (mobile) ===== */
+.links { flex-wrap: wrap; }
+.links a, .links .off { white-space: nowrap; }
+@media (max-width: 380px) {
+  .links a, .links .off { padding: 8px 14px; }
+}
